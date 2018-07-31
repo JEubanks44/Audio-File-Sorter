@@ -1,0 +1,32 @@
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe.config
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.pdb
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.dll
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\taglib-sharp.dll
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.config
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csprojAssemblyReference.cache
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Form1.resources
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Properties.Resources.resources
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.GenerateResource.cache
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CoreCompileInputs.cache
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CopyComplete
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.exe
+C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe.config
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\taglib-sharp.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.config
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csprojAssemblyReference.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Form1.resources
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Properties.Resources.resources
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.GenerateResource.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CoreCompileInputs.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CopyComplete
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.exe
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\ATL.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.pdb
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.NoArtistPopUp.resources
