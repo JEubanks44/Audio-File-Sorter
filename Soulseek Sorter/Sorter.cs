@@ -215,9 +215,14 @@ namespace Soulseek_Sorter
                             }
                         }
                     }
-                    System.IO.File.Delete(folder); // Deletes the input folder after moving all files to the new directory
                 }
                 
+                //After all files are transferred, completely delete all remaining empty folders for cleanliness
+                foreach(string folder in downloadedFolders)
+                {
+                    System.IO.File.SetAttributes(folder, FileAttributes.Normal);
+                    System.IO.File.Delete(folder);
+                }
             }
             
         }
