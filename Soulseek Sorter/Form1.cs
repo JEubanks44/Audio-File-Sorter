@@ -63,7 +63,7 @@ namespace Soulseek_Sorter
         private void button5_Click(object sender, EventArgs e)
         {
             Sorter sorter = new Sorter();
-            sorter.sortDownloads(label1.Text, label2.Text);
+            sorter.sortDownloads(label1.Text, label2.Text, this);
         }
 
         private void button1_Enter(object sender, EventArgs e)
@@ -71,5 +71,10 @@ namespace Soulseek_Sorter
             this.button1.ForeColor = Color.Firebrick;
         }
 
+        public string rtboxvalue
+        {
+            get { return richTextBox1.Text; }
+            set { richTextBox1.Text = value; }
+        }
     }
 }
