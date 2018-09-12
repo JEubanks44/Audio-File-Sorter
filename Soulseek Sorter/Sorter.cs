@@ -23,10 +23,12 @@ namespace Soulseek_Sorter
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
                 foreach (string folder in downloadedFolders) //For each folder in the input directory (Should contain the audio files)
                 {
+                    
                     int counter = 0;
                     string[] downloadedFiles = Directory.GetFiles(folder); //Array containing all files in the current folder
                     foreach (string file in downloadedFiles)
                     {
+                        
                         /*The Following if and elseif statements all perform the same action, the only variance is how they handle the file type*/
                         /*For brevity only the mp3 case is commented*/
                         if (file.Contains(".mp3"))
@@ -220,8 +222,12 @@ namespace Soulseek_Sorter
                 //After all files are transferred, completely delete all remaining empty folders for cleanliness
                 foreach(string folder in downloadedFolders)
                 {
-                    System.IO.File.SetAttributes(folder, FileAttributes.Normal);
-                    System.IO.File.Delete(folder);
+                    string[] downloadedFiles = Directory.GetFiles(folder);
+                    foreach(string file in downloadedFiles)
+                    {
+                        System.IO.File.Delete(file);
+                    }
+                    System.IO.Directory.Delete(folder);
                 }
             }
             
