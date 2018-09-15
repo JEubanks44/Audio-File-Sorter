@@ -36,6 +36,11 @@ namespace Soulseek_Sorter
             return artist;
         }
 
+        public void setTextBoxSuggestions(string suggestions)
+        {
+            textBox1.AutoCompleteCustomSource.Add(suggestions);
+        }
+
 
 
     }

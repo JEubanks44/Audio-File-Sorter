@@ -9,14 +9,18 @@ using Id3;
 using ATL;
 using System.Diagnostics;
 using System.Windows.Forms;
+using IF.Lastfm.Core.Api;
+using IF.Lastfm.Core.Helpers;
 namespace Soulseek_Sorter
 {
     public class Sorter
     {
        
         public string artist;
-        public void sortDownloads(string inputPath, string outputPath, Form1 form)
+        
+        public async void sortDownloads(string inputPath, string outputPath, Form1 form)
         {
+            var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
             string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%" }; //Banned windows file name characters
             if (Directory.Exists(inputPath))
             {
@@ -35,6 +39,8 @@ namespace Soulseek_Sorter
                         { 
                             var audiofile = TagLib.File.Create(file); //Stores an audio file as a TagLib.File
                             string album = audiofile.Tag.Album; //Gets the album name (Assumes the tag exists already)
+                            var response = await client.Album.SearchAsync(album);
+                           
                             if (counter == 0) //If this is the first file read from this folder
                             {
                                 artist = audiofile.Tag.FirstAlbumArtist; // Set the artist variable as the artist stored in the First Album Artist metadata tag
@@ -42,6 +48,10 @@ namespace Soulseek_Sorter
                             if (artist == null) //If the artist tag is blank or does not exist
                             {
                                 NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
+                                foreach(var item in response.Content)
+                                {
+                                    pop.setTextBoxSuggestions(item.ArtistName);
+                                }
                                 pop.ShowDialog(); //Show the new dialogue box
                                 counter = 1; //Sets the counter to 1 so that the artist entered in the dialogue box will be automatically applied to all files in the current folder
                             }
