@@ -111,7 +111,7 @@ namespace Soulseek_Sorter
             // 
             this.richTextBox1.Location = new System.Drawing.Point(49, 281);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(543, 161);
+            this.richTextBox1.Size = new System.Drawing.Size(543, 154);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 

@@ -26,7 +26,7 @@ namespace Soulseek_Sorter
         public void button1_Click(object sender, EventArgs e)
         {
             
-            artist = textBox1.Text;
+            artist = comboBox1.Text;
             sort.artistValue = artist;
             this.Close();
         }
@@ -38,7 +38,10 @@ namespace Soulseek_Sorter
 
         public void setTextBoxSuggestions(string suggestions)
         {
-            textBox1.AutoCompleteCustomSource.Add(suggestions);
+            if (!comboBox1.Items.Contains(suggestions))
+            {
+                comboBox1.Items.Add(suggestions);
+            }
         }
 
 

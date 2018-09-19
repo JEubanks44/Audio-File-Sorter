@@ -24,6 +24,7 @@ namespace Soulseek_Sorter
             InitializeComponent();
             label1.Text = ds.loadCompletedFolderAsString();
             label2.Text = ds.loadDestinationFolderAsString();
+            richTextBox1.Text = "Output Here: \n \n";
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -71,10 +72,15 @@ namespace Soulseek_Sorter
             this.button1.ForeColor = Color.Firebrick;
         }
 
-        public string rtboxvalue
+        public RichTextBox getRTBox()
         {
-            get { return richTextBox1.Text; }
-            set { richTextBox1.Text = value; }
+            return richTextBox1;
         }
+
+        public void printOutput(string message)
+        {
+            richTextBox1.Text += message + "\n";
+        }
+            
     }
 }

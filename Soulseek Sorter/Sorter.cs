@@ -20,8 +20,8 @@ namespace Soulseek_Sorter
         
         public async void sortDownloads(string inputPath, string outputPath, Form1 form)
         {
-            var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
-            string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%" }; //Banned windows file name characters
+            var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896"); //Generates last.fm client to handle calls to API (Need to move keys to JSON/secure)
+            string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-" }; //Banned windows file name characters
             if (Directory.Exists(inputPath))
             {
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
@@ -39,7 +39,7 @@ namespace Soulseek_Sorter
                         { 
                             var audiofile = TagLib.File.Create(file); //Stores an audio file as a TagLib.File
                             string album = audiofile.Tag.Album; //Gets the album name (Assumes the tag exists already)
-                            var response = await client.Album.SearchAsync(album);
+
                            
                             if (counter == 0) //If this is the first file read from this folder
                             {
@@ -47,13 +47,19 @@ namespace Soulseek_Sorter
                             }
                             if (artist == null) //If the artist tag is blank or does not exist
                             {
-                                NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
-                                foreach(var item in response.Content)
+                                if (album != null)
                                 {
-                                    pop.setTextBoxSuggestions(item.ArtistName);
+                                    var response = await client.Album.SearchAsync(album);
+
+                                    NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
+                                                                                       //For each item received from the call to the Last.FM API (Provides a list of artists associated with the album)
+                                    foreach (var item in response.Content)
+                                    {
+                                        pop.setTextBoxSuggestions(item.ArtistName); //Add the artists returned to the suggestions in the NoArtistPopUp Forms textbox
+                                    }
+                                    pop.ShowDialog(); //Show the new dialogue box
+                                    counter = 1; //Sets the counter to 1 so that the artist entered in the dialogue box will be automatically applied to all files in the current folder
                                 }
-                                pop.ShowDialog(); //Show the new dialogue box
-                                counter = 1; //Sets the counter to 1 so that the artist entered in the dialogue box will be automatically applied to all files in the current folder
                             }
                             string fileText = audiofile.ToString(); //Stores the full track filename (song.mp3)
                             string title = audiofile.Tag.Title;  //Stores the title of a track (song)
@@ -85,6 +91,7 @@ namespace Soulseek_Sorter
                             if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".mp3"))) //If the current track file does not already exist in destination folder
                             {
                                 System.IO.File.Move(file, Path.Combine(targetPath, title + ".mp3")); //Move the file from the input directory to the output directory
+                                form.printOutput("Moved: " + artist + " - " + album + " - " + title);
                             }      
                         }
                         else if (file.Contains(".flac"))
@@ -224,6 +231,7 @@ namespace Soulseek_Sorter
                             if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".m4a")))
                             {
                                 System.IO.File.Move(file, Path.Combine(targetPath, title + ".m4a"));
+                                
                             }
                         }
                     }
@@ -236,9 +244,12 @@ namespace Soulseek_Sorter
                     foreach(string file in downloadedFiles)
                     {
                         System.IO.File.Delete(file);
+                        
                     }
                     System.IO.Directory.Delete(folder);
                 }
+                form.printOutput("DONE!");
+                
             }
             
         }
