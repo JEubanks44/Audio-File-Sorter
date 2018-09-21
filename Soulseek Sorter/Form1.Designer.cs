@@ -36,6 +36,7 @@ namespace Soulseek_Sorter
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // button1
@@ -115,11 +116,22 @@ namespace Soulseek_Sorter
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
+            // progressBar
+            // 
+            this.progressBar.ForeColor = System.Drawing.Color.Red;
+            this.progressBar.Location = new System.Drawing.Point(49, 223);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(543, 23);
+            this.progressBar.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(649, 450);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -129,7 +141,7 @@ namespace Soulseek_Sorter
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Music Sorter";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,6 +157,7 @@ namespace Soulseek_Sorter
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        public System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

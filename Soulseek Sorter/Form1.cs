@@ -24,7 +24,7 @@ namespace Soulseek_Sorter
             InitializeComponent();
             label1.Text = ds.loadCompletedFolderAsString();
             label2.Text = ds.loadDestinationFolderAsString();
-            richTextBox1.Text = "Output Here: \n \n";
+            richTextBox1.Text = "Changes Appear Here: ";
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
@@ -35,9 +35,14 @@ namespace Soulseek_Sorter
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
+            string oldPath = label1.Text;
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 label1.Text = fbd.SelectedPath;
+                if (fbd.SelectedPath != oldPath)
+                {
+                    label1.ForeColor = Color.Black;
+                }
             }
         }
 
@@ -54,11 +59,13 @@ namespace Soulseek_Sorter
         private void button3_Click(object sender, EventArgs e)
         {
             ds.saveCompletedFolder(label1.Text);
+            label1.ForeColor = Color.Red;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             ds.saveDestinationFolder(label2.Text);
+            label2.ForeColor = Color.Red;
         }
 
         private void button5_Click(object sender, EventArgs e)

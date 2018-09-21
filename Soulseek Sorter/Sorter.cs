@@ -25,6 +25,15 @@ namespace Soulseek_Sorter
             if (Directory.Exists(inputPath))
             {
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
+                float progressIncrement = 0;
+                if(downloadedFolders.Length != 0)
+                {
+                    progressIncrement = (float)100 / (float)downloadedFolders.Length;
+                }
+                else if(downloadedFolders.Length == 0)
+                {
+                    progressIncrement = 100;
+                }
                 foreach (string folder in downloadedFolders) //For each folder in the input directory (Should contain the audio files)
                 {
                     
@@ -171,9 +180,6 @@ namespace Soulseek_Sorter
 
                             }
 
-                            Debug.WriteLine("Track: " + title);
-                            Debug.WriteLine("Album: " + album);
-                            Debug.WriteLine("Artist: " + artist);
                             string targetPath = outputPath + "\\" + artist + "\\" + album;
                             if (!Directory.Exists(targetPath))
                             {
@@ -235,6 +241,8 @@ namespace Soulseek_Sorter
                             }
                         }
                     }
+
+                    form.progressBar.Value += (int)progressIncrement;
                 }
                 
                 //After all files are transferred, completely delete all remaining empty folders for cleanliness
@@ -249,7 +257,7 @@ namespace Soulseek_Sorter
                     System.IO.Directory.Delete(folder);
                 }
                 form.printOutput("DONE!");
-                
+                form.progressBar.Value = 100;
             }
             
         }
