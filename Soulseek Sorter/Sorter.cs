@@ -26,6 +26,7 @@ namespace Soulseek_Sorter
             {
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
                 float progressIncrement = 0;
+                form.progressBar.Value = 0;
                 if(downloadedFolders.Length != 0)
                 {
                     progressIncrement = (float)100 / (float)downloadedFolders.Length;
@@ -39,6 +40,7 @@ namespace Soulseek_Sorter
                     
                     int counter = 0;
                     string[] downloadedFiles = Directory.GetFiles(folder); //Array containing all files in the current folder
+                    form.richTextBox1.AppendText(folder + "\n");
                     foreach (string file in downloadedFiles)
                     {
                         
@@ -100,148 +102,12 @@ namespace Soulseek_Sorter
                             if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".mp3"))) //If the current track file does not already exist in destination folder
                             {
                                 System.IO.File.Move(file, Path.Combine(targetPath, title + ".mp3")); //Move the file from the input directory to the output directory
-                                form.printOutput("Moved: " + artist + " - " + album + " - " + title);
+                                form.richTextBox1.AppendText("\n\tMoved: " + artist + " - " + album + " - " + title);
                             }      
                         }
-                        else if (file.Contains(".flac"))
-                        {
-                            var audiofile = TagLib.File.Create(file);
-                            string album = audiofile.Tag.Album;
-                            if (counter == 0)
-                            {
-                                artist = audiofile.Tag.FirstAlbumArtist;
-                            }
-                            if (artist == null)
-                            {
-                                NoArtistPopUp pop = new NoArtistPopUp(album, this);
-                                pop.ShowDialog();
-                                counter = 1;
-                            }
-                            string fileText = audiofile.ToString();
-                            string title = audiofile.Tag.Title;
-                            foreach (string charac in bannedChars)
-                            {
-                                if (title != null)
-                                {
-                                    title = title.Replace(charac, "");
-                                }
-                                if (album != null)
-                                {
-                                    album = album.Replace(charac, "");
-                                }
-                                if (artist != null)
-                                {
-                                    artist = artist.Replace(charac, "");
-                                }
-
-                            }
-                            string targetPath = outputPath + "\\" + artist + "\\" + album;
-                            if (!Directory.Exists(targetPath))
-                            {
-                                Directory.CreateDirectory(targetPath);
-                            }
-
-                            if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".flac")))
-                            {
-                                System.IO.File.Move(file, Path.Combine(targetPath, title + ".flac"));
-                            }
-                        }
-                        else if (file.Contains(".wav"))
-                        {
-                            var audiofile = TagLib.File.Create(file);
-                            string album = audiofile.Tag.Album;
-                            if (counter == 0)
-                            {
-                                artist = audiofile.Tag.FirstAlbumArtist;
-                            }
-                            if (artist == null)
-                            {
-                                NoArtistPopUp pop = new NoArtistPopUp(album, this);
-                                pop.ShowDialog();
-                                counter = 1;
-                            }
-                            string fileText = audiofile.ToString();
-                            string title = audiofile.Tag.Title;
-
-                            foreach (string charac in bannedChars)
-                            {
-                                if (title != null)
-                                {
-                                    title = title.Replace(charac, "");
-                                }
-                                if (album != null)
-                                {
-                                    album = album.Replace(charac, "");
-                                }
-                                if (artist != null)
-                                {
-                                    artist = artist.Replace(charac, "");
-                                }
-
-                            }
-
-                            string targetPath = outputPath + "\\" + artist + "\\" + album;
-                            if (!Directory.Exists(targetPath))
-                            {
-                                Directory.CreateDirectory(targetPath);
-                            }
-
-                            if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".wav")))
-                            {
-                                System.IO.File.Move(file, Path.Combine(targetPath, title + ".wav"));
-                            }
-                        }
-                        else if (file.Contains(".m4a"))
-                        {
-                            var audiofile = TagLib.File.Create(file);
-                            string album = audiofile.Tag.Album;
-                            if (counter == 0)
-                            {
-                                artist = audiofile.Tag.FirstAlbumArtist;
-                            }
-                            if (artist == null)
-                            {
-                                NoArtistPopUp pop = new NoArtistPopUp(album, this);
-                                pop.ShowDialog();
-                                counter = 1;
-                            }
-                            string fileText = audiofile.ToString();
-                            string title = audiofile.Tag.Title;
-
-                            foreach (string charac in bannedChars)
-                            {
-                                if (title != null)
-                                {
-                                    title = title.Replace(charac, "");
-                                }
-                                if (album != null)
-                                {
-                                    album = album.Replace(charac, "");
-                                }
-                                if (artist != null)
-                                {
-                                    artist = artist.Replace(charac, "");
-                                }
-
-                            }
-
-                            Debug.WriteLine("Track: " + title);
-                            Debug.WriteLine("Album: " + album);
-                            Debug.WriteLine("Artist: " + artist);
-                            string targetPath = outputPath + "\\" + artist + "\\" + album;
-                            if (!Directory.Exists(targetPath))
-                            {
-                                Directory.CreateDirectory(targetPath);
-                            }
-
-                            if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".m4a")))
-                            {
-                                System.IO.File.Move(file, Path.Combine(targetPath, title + ".m4a"));
-                                
-                            }
-                        }
+                        
                     }
-
+                    form.richTextBox1.AppendText("\n");
                     form.progressBar.Value += (int)progressIncrement;
                 }
                 
@@ -256,7 +122,7 @@ namespace Soulseek_Sorter
                     }
                     System.IO.Directory.Delete(folder);
                 }
-                form.printOutput("DONE!");
+                form.richTextBox1.AppendText("\nDONE!");
                 form.progressBar.Value = 100;
             }
             

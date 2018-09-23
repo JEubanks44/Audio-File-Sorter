@@ -110,6 +110,8 @@ namespace Soulseek_Sorter
             // 
             // richTextBox1
             // 
+            this.richTextBox1.BackColor = System.Drawing.Color.Crimson;
+            this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(49, 281);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(543, 154);
@@ -128,7 +130,7 @@ namespace Soulseek_Sorter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.Window;
+            this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(649, 450);
             this.Controls.Add(this.progressBar);
@@ -156,8 +158,8 @@ namespace Soulseek_Sorter
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         public System.Windows.Forms.ProgressBar progressBar;
+        public System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
