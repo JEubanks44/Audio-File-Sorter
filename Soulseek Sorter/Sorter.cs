@@ -22,6 +22,7 @@ namespace Soulseek_Sorter
         {
             var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896"); //Generates last.fm client to handle calls to API (Need to move keys to JSON/secure)
             string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-" }; //Banned windows file name characters
+            string fileType;
             if (Directory.Exists(inputPath))
             {
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
@@ -43,15 +44,25 @@ namespace Soulseek_Sorter
                     form.richTextBox1.AppendText(folder + "\n");
                     foreach (string file in downloadedFiles)
                     {
-                        
+
                         /*The Following if and elseif statements all perform the same action, the only variance is how they handle the file type*/
                         /*For brevity only the mp3 case is commented*/
                         if (file.Contains(".mp3"))
-                        { 
+                            fileType = ".mp3";
+                        else if (file.Contains(".flac"))
+                            fileType = ".flac";
+                        else if (file.Contains(".m4a"))
+                            fileType = ".m4a";
+                        else if (file.Contains(".wav"))
+                            fileType = ".wav";
+                        else
+                            fileType = "";
+
+
+                        if (fileType != "")
+                        {
                             var audiofile = TagLib.File.Create(file); //Stores an audio file as a TagLib.File
                             string album = audiofile.Tag.Album; //Gets the album name (Assumes the tag exists already)
-
-                           
                             if (counter == 0) //If this is the first file read from this folder
                             {
                                 artist = audiofile.Tag.FirstAlbumArtist; // Set the artist variable as the artist stored in the First Album Artist metadata tag
@@ -76,36 +87,35 @@ namespace Soulseek_Sorter
                             string title = audiofile.Tag.Title;  //Stores the title of a track (song)
 
                             //Goes through tag used to create the new sorted folder and files and ensures they have no banned characters that will throw errors when naming the new folders
-                            foreach(string charac in bannedChars)
+                            foreach (string charac in bannedChars)
                             {
-                               if (title != null)
+                                if (title != null)
                                 {
                                     title = title.Replace(charac, "");
                                 }
-                               if (album != null)
+                                if (album != null)
                                 {
                                     album = album.Replace(charac, "");
                                 }
-                               if (artist != null)
+                                if (artist != null)
                                 {
                                     artist = artist.Replace(charac, "");
                                 }
-                               
-                            }  
-                            
+
+                            }
+
                             string targetPath = outputPath + "\\" + artist + "\\" + album; //Creates the new folder directory path, (MusicFolder\artist name\ album name)
                             if (!Directory.Exists(targetPath)) //If the directory doesn't alread exist create it
                             {
                                 Directory.CreateDirectory(targetPath);
                             }
 
-                            if (!System.IO.File.Exists(Path.Combine(targetPath, title + ".mp3"))) //If the current track file does not already exist in destination folder
+                            if (!System.IO.File.Exists(Path.Combine(targetPath, title + fileType)) && fileType != "") //If the current track file does not already exist in destination folder
                             {
-                                System.IO.File.Move(file, Path.Combine(targetPath, title + ".mp3")); //Move the file from the input directory to the output directory
+                                System.IO.File.Move(file, Path.Combine(targetPath, title + fileType)); //Move the file from the input directory to the output directory
                                 form.richTextBox1.AppendText("\n\tMoved: " + artist + " - " + album + " - " + title);
-                            }      
+                            }
                         }
-                        
                     }
                     form.richTextBox1.AppendText("\n");
                     form.progressBar.Value += (int)progressIncrement;
