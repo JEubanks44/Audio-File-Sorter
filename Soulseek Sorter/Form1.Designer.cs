@@ -38,11 +38,14 @@ namespace Soulseek_Sorter
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.artistLabel = new System.Windows.Forms.Label();
+            this.albumName = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
+            this.button1.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.Location = new System.Drawing.Point(49, 56);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(111, 23);
@@ -50,19 +53,20 @@ namespace Soulseek_Sorter
             this.button1.Text = "Completed Folder";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            this.button1.Enter += new System.EventHandler(this.button1_Enter);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(46, 82);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.Size = new System.Drawing.Size(42, 18);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
             // button2
             // 
+            this.button2.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(49, 138);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 23);
@@ -74,15 +78,17 @@ namespace Soulseek_Sorter
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(46, 164);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(42, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "label2";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(49, 98);
+            this.button3.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(166, 56);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -92,7 +98,8 @@ namespace Soulseek_Sorter
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(49, 180);
+            this.button4.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button4.Location = new System.Drawing.Point(166, 138);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -102,6 +109,7 @@ namespace Soulseek_Sorter
             // 
             // button5
             // 
+            this.button5.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button5.Location = new System.Drawing.Point(49, 223);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
@@ -115,7 +123,8 @@ namespace Soulseek_Sorter
             this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.BackColor = System.Drawing.Color.Crimson;
+            this.richTextBox1.BackColor = System.Drawing.Color.DarkRed;
+            this.richTextBox1.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(49, 281);
             this.richTextBox1.Name = "richTextBox1";
@@ -136,12 +145,33 @@ namespace Soulseek_Sorter
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.InitialImage = global::Soulseek_Sorter.Properties.Resources.AlbumArtForProgram;
-            this.pictureBox1.Location = new System.Drawing.Point(344, 12);
+            this.pictureBox1.InitialImage = global::Soulseek_Sorter.Properties.Resources.InitialImageShield;
+            this.pictureBox1.Location = new System.Drawing.Point(414, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(247, 234);
+            this.pictureBox1.Size = new System.Drawing.Size(177, 165);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            // 
+            // artistLabel
+            // 
+            this.artistLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.artistLabel.AutoSize = true;
+            this.artistLabel.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artistLabel.Location = new System.Drawing.Point(411, 190);
+            this.artistLabel.Name = "artistLabel";
+            this.artistLabel.Size = new System.Drawing.Size(34, 15);
+            this.artistLabel.TabIndex = 10;
+            this.artistLabel.Text = "Artist";
+            // 
+            // albumName
+            // 
+            this.albumName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.albumName.AutoSize = true;
+            this.albumName.Location = new System.Drawing.Point(411, 212);
+            this.albumName.Name = "albumName";
+            this.albumName.Size = new System.Drawing.Size(36, 13);
+            this.albumName.TabIndex = 11;
+            this.albumName.Text = "Album";
             // 
             // Form1
             // 
@@ -150,6 +180,8 @@ namespace Soulseek_Sorter
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(649, 450);
+            this.Controls.Add(this.albumName);
+            this.Controls.Add(this.artistLabel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
@@ -180,6 +212,8 @@ namespace Soulseek_Sorter
         public System.Windows.Forms.ProgressBar progressBar;
         public System.Windows.Forms.RichTextBox richTextBox1;
         public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.Label artistLabel;
+        public System.Windows.Forms.Label albumName;
     }
 }
 

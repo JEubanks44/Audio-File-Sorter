@@ -77,10 +77,7 @@ namespace Soulseek_Sorter
             sorter.sortDownloads(label1.Text, label2.Text, this);
         }
 
-        private void button1_Enter(object sender, EventArgs e)
-        {
-            this.button1.ForeColor = Color.Firebrick;
-        }
+
 
         public RichTextBox getRTBox()
         {
@@ -91,6 +88,6 @@ namespace Soulseek_Sorter
         {
             richTextBox1.Text += message + "\n";
         }
-            
+
     }
 }

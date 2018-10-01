@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\AlbumArtForProgram.png" />
+    <None Include="Resources\InitialImageShield.png" />
     <None Include="Resources\AlbumArtForProgram1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

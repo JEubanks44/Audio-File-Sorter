@@ -118,9 +118,23 @@ namespace Soulseek_Sorter
 
                             //Small section to load the image result from last fm to the picture box
                             var albumInfoSearchResults = await client.Album.GetInfoAsync(artist, album);
-                            string imageURL = albumInfoSearchResults.Content.Images.Largest.AbsoluteUri;
-                            if (imageURL != null)
-                                form.pictureBox1.Load(imageURL);
+                            string imageURL;
+                            try
+                            {
+
+
+                                if (!albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri.Equals(null))
+                                {
+                                    imageURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
+                                    form.pictureBox1.Load(imageURL);
+                                }
+                            }
+                            catch
+                            {
+                                form.pictureBox1.Image = form.pictureBox1.ErrorImage;
+                            }
+                            form.artistLabel.Text = artist;
+                            form.albumName.Text = album;
                             string targetPath = outputPath + "\\" + artist + "\\" + album; //Creates the new folder directory path, (MusicFolder\artist name\ album name)
                             if (!Directory.Exists(targetPath)) //If the directory doesn't alread exist create it
                             {
@@ -131,6 +145,7 @@ namespace Soulseek_Sorter
                             {
                                 System.IO.File.Move(file, Path.Combine(targetPath, title + fileType)); //Move the file from the input directory to the output directory
                                 form.richTextBox1.AppendText("\n\tMoved: " + artist + " - " + album + " - " + title);
+                                form.richTextBox1.ScrollToCaret();
                             }
                         }
                     }
@@ -150,6 +165,7 @@ namespace Soulseek_Sorter
                     System.IO.Directory.Delete(folder);
                 }
                 form.richTextBox1.AppendText("\nDONE!");
+                form.richTextBox1.ScrollToCaret();
                 form.progressBar.Value = 100;
             }
             

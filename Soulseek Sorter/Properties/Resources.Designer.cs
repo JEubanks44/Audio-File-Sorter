@@ -69,5 +69,15 @@ namespace Soulseek_Sorter.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap InitialImageShield {
+            get {
+                object obj = ResourceManager.GetObject("InitialImageShield", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
