@@ -37,6 +37,8 @@ namespace Soulseek_Sorter
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -53,7 +55,7 @@ namespace Soulseek_Sorter
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(166, 61);
+            this.label1.Location = new System.Drawing.Point(46, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -61,7 +63,7 @@ namespace Soulseek_Sorter
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(49, 109);
+            this.button2.Location = new System.Drawing.Point(49, 138);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(111, 23);
             this.button2.TabIndex = 2;
@@ -72,7 +74,7 @@ namespace Soulseek_Sorter
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(166, 114);
+            this.label2.Location = new System.Drawing.Point(46, 164);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 3;
@@ -80,7 +82,7 @@ namespace Soulseek_Sorter
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(49, 80);
+            this.button3.Location = new System.Drawing.Point(49, 98);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -90,7 +92,7 @@ namespace Soulseek_Sorter
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(49, 133);
+            this.button4.Location = new System.Drawing.Point(49, 180);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -100,9 +102,9 @@ namespace Soulseek_Sorter
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(49, 252);
+            this.button5.Location = new System.Drawing.Point(49, 223);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(543, 23);
+            this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 6;
             this.button5.Text = "Sort";
             this.button5.UseVisualStyleBackColor = true;
@@ -110,6 +112,9 @@ namespace Soulseek_Sorter
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.Color.Crimson;
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(49, 281);
@@ -120,11 +125,23 @@ namespace Soulseek_Sorter
             // 
             // progressBar
             // 
+            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.progressBar.ForeColor = System.Drawing.Color.Red;
-            this.progressBar.Location = new System.Drawing.Point(49, 223);
+            this.progressBar.Location = new System.Drawing.Point(49, 252);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(543, 23);
             this.progressBar.TabIndex = 8;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.InitialImage = global::Soulseek_Sorter.Properties.Resources.AlbumArtForProgram;
+            this.pictureBox1.Location = new System.Drawing.Point(344, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(247, 234);
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -133,6 +150,7 @@ namespace Soulseek_Sorter
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(649, 450);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);
@@ -144,6 +162,7 @@ namespace Soulseek_Sorter
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Music Sorter";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -160,6 +179,7 @@ namespace Soulseek_Sorter
         private System.Windows.Forms.Button button5;
         public System.Windows.Forms.ProgressBar progressBar;
         public System.Windows.Forms.RichTextBox richTextBox1;
+        public System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

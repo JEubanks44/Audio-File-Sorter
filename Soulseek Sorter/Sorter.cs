@@ -71,17 +71,29 @@ namespace Soulseek_Sorter
                             {
                                 if (album != null)
                                 {
-                                    var response = await client.Album.SearchAsync(album);
-
+                                    var albumNameSearchResults = await client.Album.SearchAsync(album);
+                                    
+                                    
                                     NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
-                                                                                       //For each item received from the call to the Last.FM API (Provides a list of artists associated with the album)
-                                    foreach (var item in response.Content)
+                                         
+                                    //For each item received from the call to the Last.FM API (Provides a list of artists associated with the album)
+                                    foreach (var item in albumNameSearchResults.Content)
                                     {
                                         pop.setTextBoxSuggestions(item.ArtistName); //Add the artists returned to the suggestions in the NoArtistPopUp Forms textbox
+                                        
                                     }
                                     pop.ShowDialog(); //Show the new dialogue box
                                     counter = 1; //Sets the counter to 1 so that the artist entered in the dialogue box will be automatically applied to all files in the current folder
                                 }
+                            }
+                            var tagSearchResults = await client.Album.GetTopTagsAsync(artist, album, false);
+                            string[] genres = new string[tagSearchResults.Content.Count];
+                            
+                            for(int i = 0; i < genres.Length; i++)
+                            {
+                                Debug.WriteLine(tagSearchResults.Content);
+                                genres[i] = tagSearchResults.Content[i].Name;
+                                
                             }
                             string fileText = audiofile.ToString(); //Stores the full track filename (song.mp3)
                             string title = audiofile.Tag.Title;  //Stores the title of a track (song)
@@ -104,6 +116,11 @@ namespace Soulseek_Sorter
 
                             }
 
+                            //Small section to load the image result from last fm to the picture box
+                            var albumInfoSearchResults = await client.Album.GetInfoAsync(artist, album);
+                            string imageURL = albumInfoSearchResults.Content.Images.Largest.AbsoluteUri;
+                            if (imageURL != null)
+                                form.pictureBox1.Load(imageURL);
                             string targetPath = outputPath + "\\" + artist + "\\" + album; //Creates the new folder directory path, (MusicFolder\artist name\ album name)
                             if (!Directory.Exists(targetPath)) //If the directory doesn't alread exist create it
                             {

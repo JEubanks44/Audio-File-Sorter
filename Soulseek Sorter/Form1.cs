@@ -25,6 +25,9 @@ namespace Soulseek_Sorter
             label1.Text = ds.loadCompletedFolderAsString();
             label2.Text = ds.loadDestinationFolderAsString();
             richTextBox1.Text = "Changes Appear Here: \n";
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Image = pictureBox1.InitialImage;
+            
         }
 
         private void folderBrowserDialog1_HelpRequest(object sender, EventArgs e)
