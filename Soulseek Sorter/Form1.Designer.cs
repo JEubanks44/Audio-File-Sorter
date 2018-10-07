@@ -167,9 +167,10 @@ namespace Soulseek_Sorter
             // 
             this.albumName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.albumName.AutoSize = true;
+            this.albumName.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.albumName.Location = new System.Drawing.Point(411, 212);
             this.albumName.Name = "albumName";
-            this.albumName.Size = new System.Drawing.Size(36, 13);
+            this.albumName.Size = new System.Drawing.Size(37, 15);
             this.albumName.TabIndex = 11;
             this.albumName.Text = "Album";
             // 
