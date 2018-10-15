@@ -40,6 +40,8 @@ namespace Soulseek_Sorter
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.artistLabel = new System.Windows.Forms.Label();
             this.albumName = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,7 +130,7 @@ namespace Soulseek_Sorter
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(49, 281);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(543, 154);
+            this.richTextBox1.Size = new System.Drawing.Size(723, 154);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
@@ -139,14 +141,14 @@ namespace Soulseek_Sorter
             this.progressBar.ForeColor = System.Drawing.Color.Red;
             this.progressBar.Location = new System.Drawing.Point(49, 252);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(543, 23);
+            this.progressBar.Size = new System.Drawing.Size(723, 23);
             this.progressBar.TabIndex = 8;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.InitialImage = global::Soulseek_Sorter.Properties.Resources.InitialImageShield;
-            this.pictureBox1.Location = new System.Drawing.Point(414, 12);
+            this.pictureBox1.Location = new System.Drawing.Point(594, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(177, 165);
             this.pictureBox1.TabIndex = 9;
@@ -157,7 +159,7 @@ namespace Soulseek_Sorter
             this.artistLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.artistLabel.AutoSize = true;
             this.artistLabel.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.artistLabel.Location = new System.Drawing.Point(411, 190);
+            this.artistLabel.Location = new System.Drawing.Point(591, 190);
             this.artistLabel.Name = "artistLabel";
             this.artistLabel.Size = new System.Drawing.Size(34, 15);
             this.artistLabel.TabIndex = 10;
@@ -168,11 +170,33 @@ namespace Soulseek_Sorter
             this.albumName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.albumName.AutoSize = true;
             this.albumName.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.albumName.Location = new System.Drawing.Point(411, 212);
+            this.albumName.Location = new System.Drawing.Point(591, 212);
             this.albumName.Name = "albumName";
             this.albumName.Size = new System.Drawing.Size(37, 15);
             this.albumName.TabIndex = 11;
             this.albumName.Text = "Album";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(130, 227);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Progress: ";
+            this.label3.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(188, 227);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(22, 15);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "0%";
+            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // Form1
             // 
@@ -180,7 +204,9 @@ namespace Soulseek_Sorter
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(649, 450);
+            this.ClientSize = new System.Drawing.Size(829, 450);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.albumName);
             this.Controls.Add(this.artistLabel);
             this.Controls.Add(this.pictureBox1);
@@ -215,6 +241,8 @@ namespace Soulseek_Sorter
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Label artistLabel;
         public System.Windows.Forms.Label albumName;
+        private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Label label4;
     }
 }
 

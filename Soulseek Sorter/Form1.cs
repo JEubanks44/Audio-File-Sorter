@@ -89,5 +89,14 @@ namespace Soulseek_Sorter
             richTextBox1.Text += message + "\n";
         }
 
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

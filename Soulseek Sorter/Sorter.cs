@@ -16,7 +16,7 @@ namespace Soulseek_Sorter
     public class Sorter
     {
 
-
+       
         public string artist;
         public async void sortDownloads(string inputPath, string outputPath, Form1 form)
         {
@@ -60,7 +60,7 @@ namespace Soulseek_Sorter
                             fileType = "";
 
 
-                        if (fileType != "") //If the file type is one of the valid types
+                        if (fileType != "" && file.Length < 260) //If the file type is one of the valid types
                         {
                             TagLib.File audiofile; //Stores an audio file as a TagLib.File
                             if(fileType.Equals(".flac"))
@@ -117,12 +117,12 @@ namespace Soulseek_Sorter
                             }
 
                             //Small section to load the image result from last fm to the picture box
-                            var albumInfoSearchResults = await client.Album.GetInfoAsync(artist, album);
-                            string imgURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
+                            
                             try
                             {
 
-
+                                var albumInfoSearchResults = await client.Album.GetInfoAsync(artist, album);
+                                string imgURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
                                 if (!imgURL.Equals(null))
                                 {
                                     imgURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
@@ -132,7 +132,7 @@ namespace Soulseek_Sorter
                             catch(Exception e)
                             {
                                 Debug.WriteLine(e.Message);
-                                form.pictureBox1.Image = form.pictureBox1.ErrorImage;
+                                
                             }
                             form.artistLabel.Text = artist;
                             form.albumName.Text = album;
@@ -152,6 +152,7 @@ namespace Soulseek_Sorter
                     }
                     form.richTextBox1.AppendText("\n");
                     form.progressBar.Value += (int)progressIncrement;
+                    form.label4.Text = form.progressBar.Value.ToString() + "%";
                 }
                 
                 //After all files are transferred, completely delete all remaining empty folders for cleanliness
@@ -160,7 +161,8 @@ namespace Soulseek_Sorter
                     string[] downloadedFiles = Directory.GetFiles(folder);
                     foreach(string file in downloadedFiles)
                     {
-                        System.IO.File.Delete(file);
+                        if(file.Length < 260)
+                            System.IO.File.Delete(file);
                         
                     }
                     System.IO.Directory.Delete(folder);
@@ -168,6 +170,7 @@ namespace Soulseek_Sorter
                 form.richTextBox1.AppendText("\nDONE!");
                 form.richTextBox1.ScrollToCaret();
                 form.progressBar.Value = 100;
+                form.label4.Text = form.progressBar.Value.ToString() + "%";
             }
             
         }
