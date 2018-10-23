@@ -23,7 +23,8 @@ namespace Soulseek_Sorter
             var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896"); //Generates last.fm client to handle calls to API (Need to move keys to JSON/secure)
             string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-" }; //Banned windows file name characters
             string fileType;
-
+            recurFileSort(inputPath, outputPath);
+            /*
             if (Directory.Exists(inputPath))
             {
                 string[] downloadedFolders = Directory.GetDirectories(inputPath); //Array containing all folders in the input directory
@@ -47,7 +48,7 @@ namespace Soulseek_Sorter
                     {
 
                         /*The Following if and elseif statements all perform the same action, the only variance is how they handle the file type*/
-                        /*For brevity only the mp3 case is commented*/
+                        /*For brevity only the mp3 case is commented
                         if (file.Contains(".mp3"))
                             fileType = ".mp3";
                         else if (file.Contains(".flac"))
@@ -172,6 +173,7 @@ namespace Soulseek_Sorter
                 form.progressBar.Value = 100;
                 form.label4.Text = form.progressBar.Value.ToString() + "%";
             }
+            */
             
         }
 
@@ -187,30 +189,78 @@ namespace Soulseek_Sorter
             set { artist = value; }
         }
 
-        private void recurFileSearch(string inPath)
+        private async void recurFileSort(string inPath, string outPath)
         {
             string[] files = Directory.GetFiles(inPath);
-            foreach (string fileName in files)
+            string album = null;
+            string artist = null;
+            string title = null;
+            string imgURL = null;
+            for (int i = 0; i < files.Length; i++)
             {
-                if ((fileName.Contains(".mp3") || fileName.Contains(".wav") || fileName.Contains(".flac")))
+                Debug.WriteLine(files[i]);
+                if ((files[i].Contains(".mp3") || files[i].Contains(".wav") || files[i].Contains(".flac")))
                 {
-                    
+                    if(i == 0)
+                    {
+                        var initInfoResult = await getInitialInfo(files[i]);
+                        album = initInfoResult.Item1;
+                        artist = initInfoResult.Item2;
+                        title = initInfoResult.Item3;
+                        imgURL = initInfoResult.Item4;
+
+                    }
+                    string[] sortingInfo = { album, artist, title, imgURL };
+                    sortFile(files[i], sortingInfo, inPath, outPath);
                 }
             }
 
             string[] subDirs = Directory.GetDirectories(inPath);
             foreach (string direc in subDirs)
             {
-                recurFileSearch(direc);
+                Debug.WriteLine(direc);
+                recurFileSort(direc, outPath);
             }
             
           
         }
 
-        void sortFile(string fileName)
+        private void sortFile(string file, string[] sortInfo, string inPath, string outPath)
         {
             TagLib.File audioFile;
-            if(fileName.Contains(".flac"))
+            string fileType;
+            if(file.Contains(".flac"))
+            {
+                audioFile = TagLib.Flac.File.Create(file);
+                fileType = ".flac";
+            }
+            else
+            {
+                audioFile = TagLib.File.Create(file);
+                fileType = ".mp3";
+            }
+            
+            string targetPath = outPath + "\\" + sortInfo[1] + "\\" + sortInfo[0]; //Creates the new folder directory path, (MusicFolder\artist name\ album name)
+            Debug.WriteLine(targetPath);
+            if (!Directory.Exists(targetPath)) //If the directory doesn't alread exist create it
+            {
+                Directory.CreateDirectory(targetPath);
+            }
+
+            if (!System.IO.File.Exists(Path.Combine(targetPath, sortInfo[2] + fileType)) && fileType != "") //If the current track file does not already exist in destination folder
+            {
+                System.IO.File.Move(file, Path.Combine(targetPath, sortInfo[2] + fileType)); //Move the file from the input directory to the output directory
+            }
+        }
+
+        /*
+         */
+        private async Task<Tuple<string , string, string, string>> getInitialInfo(string fileName)
+        {
+            TagLib.File audioFile;
+            var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
+            string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-" }; //Banned windows file name characters
+            if (fileName.Contains(".flac"))
             {
                 audioFile = TagLib.Flac.File.Create(fileName);
             }
@@ -218,6 +268,64 @@ namespace Soulseek_Sorter
             {
                 audioFile = TagLib.File.Create(fileName);
             }
+            string artist = audioFile.Tag.FirstPerformer.ToString();
+            string album = audioFile.Tag.Album.ToString();
+            string title = audioFile.Tag.Title.ToString();
+            string imgURL = null;
+            if (artist == null) //If the artist tag is blank or does not exist
+            {
+                if (album != null)
+                {
+                    var albumNameSearchResults = await client.Album.SearchAsync(album); //Searches the last fm api for info on the current album. Async function so the program awaits response
+
+
+                    NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
+
+                    //For each item received from the call to the Last.FM API (Provides a list of artists associated with the album)
+                    foreach (var item in albumNameSearchResults.Content)
+                    {
+                        pop.setTextBoxSuggestions(item.ArtistName); //Add the artists returned to the suggestions in the NoArtistPopUp Forms textbox
+
+                    }
+                    pop.ShowDialog(); //Show the new dialogue box
+                }
+            }
+
+            foreach (string charac in bannedChars)
+            {
+                if (title != null)
+                {
+                    title = title.Replace(charac, "");
+                }
+                if (album != null)
+                {
+                    album = album.Replace(charac, "");
+                }
+                if (artist != null)
+                {
+                    artist = artist.Replace(charac, "");
+                }
+
+            }
+
+            try
+            {
+
+                var albumInfoSearchResults = await client.Album.GetInfoAsync(artist, album);
+                imgURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
+                if (!imgURL.Equals(null))
+                {
+                    imgURL = albumInfoSearchResults.Content.Images.ExtraLarge.AbsoluteUri;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+
+            }
+
+            var results = new Tuple<string, string, string, string>(album, artist, title, imgURL);
+            return results;
         }
     }
 }
