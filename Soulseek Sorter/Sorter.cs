@@ -187,5 +187,37 @@ namespace Soulseek_Sorter
             set { artist = value; }
         }
 
+        private void recurFileSearch(string inPath)
+        {
+            string[] files = Directory.GetFiles(inPath);
+            foreach (string fileName in files)
+            {
+                if ((fileName.Contains(".mp3") || fileName.Contains(".wav") || fileName.Contains(".flac")))
+                {
+                    
+                }
+            }
+
+            string[] subDirs = Directory.GetDirectories(inPath);
+            foreach (string direc in subDirs)
+            {
+                recurFileSearch(direc);
+            }
+            
+          
+        }
+
+        void sortFile(string fileName)
+        {
+            TagLib.File audioFile;
+            if(fileName.Contains(".flac"))
+            {
+                audioFile = TagLib.Flac.File.Create(fileName);
+            }
+            else
+            {
+                audioFile = TagLib.File.Create(fileName);
+            }
+        }
     }
 }
