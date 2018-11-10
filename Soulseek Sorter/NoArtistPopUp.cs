@@ -27,7 +27,7 @@ namespace Soulseek_Sorter
         {
             
             artist = comboBox1.Text;
-            sort.artistValue = artist;
+            sort.artist = artist;
             this.Close();
         }
 
