@@ -35,6 +35,7 @@ namespace Soulseek_Sorter
 
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -59,17 +60,20 @@ namespace Soulseek_Sorter
             }
         }
 
+
         private void button3_Click(object sender, EventArgs e)
         {
             ds.saveCompletedFolder(label1.Text);
             label1.ForeColor = Color.Red;
         }
 
+
         private void button4_Click(object sender, EventArgs e)
         {
             ds.saveDestinationFolder(label2.Text);
             label2.ForeColor = Color.Red;
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -78,25 +82,15 @@ namespace Soulseek_Sorter
         }
 
 
-
         public RichTextBox getRTBox()
         {
             return richTextBox1;
         }
 
+
         public void printOutput(string message)
         {
             richTextBox1.Text += message + "\n";
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

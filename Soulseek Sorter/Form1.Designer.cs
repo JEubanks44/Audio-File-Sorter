@@ -36,12 +36,13 @@ namespace Soulseek_Sorter
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.progressBar = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.artistLabel = new System.Windows.Forms.Label();
             this.albumName = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.newReleaseButton = new System.Windows.Forms.Button();
+            this.DataUpdateButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,40 +129,30 @@ namespace Soulseek_Sorter
             this.richTextBox1.BackColor = System.Drawing.Color.DarkRed;
             this.richTextBox1.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
-            this.richTextBox1.Location = new System.Drawing.Point(49, 281);
+            this.richTextBox1.Location = new System.Drawing.Point(49, 252);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(723, 154);
+            this.richTextBox1.Size = new System.Drawing.Size(723, 183);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
             // 
-            // progressBar
-            // 
-            this.progressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.progressBar.ForeColor = System.Drawing.Color.Red;
-            this.progressBar.Location = new System.Drawing.Point(49, 252);
-            this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(723, 23);
-            this.progressBar.TabIndex = 8;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.InitialImage = global::Soulseek_Sorter.Properties.Resources.InitialImageShield;
             this.pictureBox1.Location = new System.Drawing.Point(594, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(177, 165);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.WaitOnLoad = true;
             // 
             // artistLabel
             // 
             this.artistLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.artistLabel.AutoSize = true;
-            this.artistLabel.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.artistLabel.Location = new System.Drawing.Point(591, 190);
+            this.artistLabel.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artistLabel.Location = new System.Drawing.Point(591, 194);
             this.artistLabel.Name = "artistLabel";
-            this.artistLabel.Size = new System.Drawing.Size(34, 15);
+            this.artistLabel.Size = new System.Drawing.Size(42, 18);
             this.artistLabel.TabIndex = 10;
             this.artistLabel.Text = "Artist";
             // 
@@ -169,10 +160,10 @@ namespace Soulseek_Sorter
             // 
             this.albumName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.albumName.AutoSize = true;
-            this.albumName.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.albumName.Location = new System.Drawing.Point(591, 212);
+            this.albumName.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.albumName.Location = new System.Drawing.Point(591, 228);
             this.albumName.Name = "albumName";
-            this.albumName.Size = new System.Drawing.Size(37, 15);
+            this.albumName.Size = new System.Drawing.Size(47, 18);
             this.albumName.TabIndex = 11;
             this.albumName.Text = "Album";
             // 
@@ -185,7 +176,6 @@ namespace Soulseek_Sorter
             this.label3.Size = new System.Drawing.Size(52, 15);
             this.label3.TabIndex = 12;
             this.label3.Text = "Progress: ";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -196,7 +186,24 @@ namespace Soulseek_Sorter
             this.label4.Size = new System.Drawing.Size(22, 15);
             this.label4.TabIndex = 13;
             this.label4.Text = "0%";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            // 
+            // newReleaseButton
+            // 
+            this.newReleaseButton.Location = new System.Drawing.Point(312, 223);
+            this.newReleaseButton.Name = "newReleaseButton";
+            this.newReleaseButton.Size = new System.Drawing.Size(184, 23);
+            this.newReleaseButton.TabIndex = 14;
+            this.newReleaseButton.Text = "Find New Releases";
+            this.newReleaseButton.UseVisualStyleBackColor = true;
+            // 
+            // DataUpdateButton
+            // 
+            this.DataUpdateButton.Location = new System.Drawing.Point(312, 194);
+            this.DataUpdateButton.Name = "DataUpdateButton";
+            this.DataUpdateButton.Size = new System.Drawing.Size(184, 23);
+            this.DataUpdateButton.TabIndex = 15;
+            this.DataUpdateButton.Text = "Update Database";
+            this.DataUpdateButton.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -205,12 +212,13 @@ namespace Soulseek_Sorter
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(829, 450);
+            this.Controls.Add(this.DataUpdateButton);
+            this.Controls.Add(this.newReleaseButton);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.albumName);
             this.Controls.Add(this.artistLabel);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -236,13 +244,14 @@ namespace Soulseek_Sorter
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        public System.Windows.Forms.ProgressBar progressBar;
         public System.Windows.Forms.RichTextBox richTextBox1;
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.Label artistLabel;
         public System.Windows.Forms.Label albumName;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button newReleaseButton;
+        private System.Windows.Forms.Button DataUpdateButton;
     }
 }
 
