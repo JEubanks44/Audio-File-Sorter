@@ -8,6 +8,11 @@ namespace Soulseek_Sorter
 {
     public class DataStorage
     {
+        public void saveDatabaseFolder(string filePath)
+        {
+            File.WriteAllText("DatabaseFolderSave.txt", filePath);
+        }
+        
         public void saveCompletedFolder(string filePath)
         {
             File.WriteAllText("CompleteFolderSave.txt", filePath);
@@ -16,6 +21,21 @@ namespace Soulseek_Sorter
         public void saveDestinationFolder(string filePath)
         {
             File.WriteAllText("DestinationFolderSave.txt", filePath);
+        }
+
+        public string loadDatabaseFolderAsString()
+        {
+            string path;
+            if (File.Exists("DatabaseFolderSave.txt"))
+            {
+                path = File.ReadAllText("DatabaseFolderSave.txt");
+
+            }
+            else
+            {
+                path = "Empty";
+            }
+            return path;
         }
 
         public string loadDestinationFolderAsString()

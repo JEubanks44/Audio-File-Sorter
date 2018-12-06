@@ -56,6 +56,7 @@
             // 
             this.comboBox1.AllowDrop = true;
             this.comboBox1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.comboBox1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(140, 101);
             this.comboBox1.Name = "comboBox1";

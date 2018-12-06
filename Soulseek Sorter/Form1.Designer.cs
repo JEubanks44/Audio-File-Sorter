@@ -43,6 +43,7 @@ namespace Soulseek_Sorter
             this.label4 = new System.Windows.Forms.Label();
             this.newReleaseButton = new System.Windows.Forms.Button();
             this.DataUpdateButton = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -205,6 +206,16 @@ namespace Soulseek_Sorter
             this.DataUpdateButton.Text = "Update Database";
             this.DataUpdateButton.UseVisualStyleBackColor = true;
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(247, 138);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 16;
+            this.button6.Text = "Save as DB";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,6 +223,7 @@ namespace Soulseek_Sorter
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(829, 450);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.DataUpdateButton);
             this.Controls.Add(this.newReleaseButton);
             this.Controls.Add(this.label4);
@@ -252,6 +264,7 @@ namespace Soulseek_Sorter
         public System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button newReleaseButton;
         private System.Windows.Forms.Button DataUpdateButton;
+        private System.Windows.Forms.Button button6;
     }
 }
 

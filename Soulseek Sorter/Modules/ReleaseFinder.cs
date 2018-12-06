@@ -7,17 +7,11 @@ using System.IO;
 using System.Windows.Forms;
 using System.Diagnostics;
 using ATL;
-struct ReleaseDate
-{
-    int day;
-    int year;
-    int month;
-}
+
 struct Release
 {
     string Title;
     string Artist;
-    ReleaseDate Date;
 }
 namespace Soulseek_Sorter.Modules
 {

@@ -11,8 +11,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Helpers;
-
-
+using System.Threading;
+using IF.Lastfm.Core.Objects;
 public struct TrackInfo
 {
     public string title;
@@ -40,10 +40,12 @@ namespace Soulseek_Sorter
         public string artist; //Variable that is used to hold the artist value returned from the No Artist Pop Up Window
         public string parentPath; //The parent folder, held to avoid it being deleted
         public int counter1 = 0;
+        LastfmClient client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
         Database data = new Database();
-        
+        [STAThread]
         public void sortDownloads(string inputPath, string outputPath, Form1 form)
         {
+            /*
             data.addArtist("Deathspell Omega");
             data.addArtist("Absu");
             data.addArtist("Nyredolk");
@@ -52,14 +54,18 @@ namespace Soulseek_Sorter
             data.addAlbum("Mgla", "With Hearts Towards None");
             data.addAlbum("Metallica", "...And Justice For All");
             data.addAlbum("Mgla", "Exercises in Futility");
+            data.updateAlbumWithInfo("Mgla", "Exercises in Futility", "www.no-solace.com");
+            data.updateAlbumWithInfo("Skinless", "Savagery", "www.noURL.com");
             data.addAlbum("Deathspell Omega", "Drought");     
             data.deleteArtist("Deathspell Omega");
-            recurFileSort(inputPath, outputPath, ref form);
+            */
+            recurFileSort(inputPath, outputPath, form);
             form.printOutput("\nDONE!");
             form.richTextBox1.ScrollToCaret();
+            
         }
    
-        private void recurFileSort(string inPath, string outPath, ref Form1 form)
+        private void recurFileSort(string inPath, string outPath, Form1 form)
         {
 
             if (counter1 == 0)
@@ -106,13 +112,13 @@ namespace Soulseek_Sorter
                         }
                         if (counter == 0)
                         {
-                            var initInfoInit = Task.Run(() => { getInitialInfo(audioFile); });//Searches the last fm api for info on the current album. Async function so the program awaits response
-                            var initInfo = initInfoInit.ContinueWith(t => getInitialInfo(audioFile));
-                       
-                            initInfo.Wait();
-                            albumInfo.album = initInfo.Result.Result.Item1;
-                            albumInfo.artist = initInfo.Result.Result.Item2;
-                            albumInfo.imageURL = initInfo.Result.Result.Item4;
+                            //var initInfo = getInitialInfo(audioFile); //Searches the last fm api for info on the current album. Async function so the program awaits response
+
+
+
+                            albumInfo.album = getAlbumName(audioFile).Result;
+                            albumInfo.artist = getArtistName(audioFile).Result;
+                            albumInfo.imageURL = getAlbumArtwork(audioFile, albumInfo.artist, albumInfo.album).Result;
                             counter = 1;
                             Debug.WriteLine(albumInfo.imageURL);
 
@@ -127,6 +133,14 @@ namespace Soulseek_Sorter
                             if(albumInfo.album != null)
                             {
                                 form.albumName.Text = albumInfo.album;
+                            }
+                            try
+                            {
+                                data.updateAlbumWithInfo(albumInfo.artist, albumInfo.album, albumInfo.imageURL);
+                            }
+                            catch(Exception e)
+                            {
+                                Debug.WriteLine(e.Message);
                             }
                         }
 
@@ -180,14 +194,14 @@ namespace Soulseek_Sorter
             foreach (string direc in subDirs)
             {
                 Debug.WriteLine(direc);
-                recurFileSort(direc, outPath, ref form);
+                recurFileSort(direc, outPath, form);
             }
             if (inPath != parentPath)
             {
                 System.IO.Directory.Delete(inPath);
             }
-            
 
+            return;
         }
 
         private void sortFile(string file, AlbumInfo albumInfo, string inPath, string outPath, string trackTitle, string fileType)
@@ -211,64 +225,57 @@ namespace Soulseek_Sorter
          * Task: getInitialInfo
          * Purpose: Retrieves the main metadata from the local tags and from the last.fm API whenever a new album is found
          */
-        private async Task<Tuple<string , string, string, string>> getInitialInfo(TagLib.File audioFile)
+
+        private void updateUI(ref Form1 form, string album, string picture, string artist)
         {
-            
-            var client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
-            string artist2; //Local version of the public variable artist
-            string title;
-            try //Since .ToString() throws a NullReference Exception when the object is null, catch the exception and manually set artist2 to null
-            {
-                artist2 = audioFile.Tag.FirstPerformer.ToString();
-            }catch(Exception e)
-            {
-                artist2 = null;
+            form.artistLabel.Text = artist;
+            form.albumName.Text = album;
+            form.pictureBox1.Load(picture);
+        }
 
-            }
+        private async Task<string> getAlbumName(TagLib.File audioFile)
+        {
+            string albumName;
+            albumName = audioFile.Tag.Album;
+            return albumName;
+        }
 
-            string album = audioFile.Tag.Album.ToString(); //Retrieves album title from the metadata tags
+        private async Task<string> getArtistName(TagLib.File audioFile)
+        {
+            string artistName;
+            string albumName;
+            albumName = audioFile.Tag.Album;
             try
             {
-                title = audioFile.Tag.Title.ToString(); //Retrieves the track title from the metadata tags
+                artistName = audioFile.Tag.FirstPerformer;
             }
             catch(Exception e)
             {
-                title = null;
+                artistName = null;
             }
-
-            string imgURL = null;
-            try
+            if (albumName != null && artistName == null)
             {
-                if (artist2 == null) //If the artist tag is blank or does not exist
+                var artistNameSearch = Task.Run(() => { client.Album.SearchAsync(albumName); });
+                var searchResults = artistNameSearch.ContinueWith(t => client.Album.SearchAsync(albumName));
+                searchResults.Wait();
+                NoArtistPopUp pop = new NoArtistPopUp(albumName, this);          
+                foreach (var item in searchResults.Result.Result.Content)
                 {
-                    if (album != null) //If the album tag does exist
-                    {
-
-                        var albumNameSearchResults = Task.Run(() => { client.Album.SearchAsync(album); });//Searches the last fm api for info on the current album. Async function so the program awaits response
-                        var searchResults = albumNameSearchResults.ContinueWith(t => client.Album.SearchAsync(album));
-                        searchResults.Wait();
-                        NoArtistPopUp pop = new NoArtistPopUp(album, this);//Open the new dialogue box to allow the user to enter the artist manually
-                                                                           //For each item received from the call to the Last.FM API (Provides a list of artists associated with the album)
-                        foreach (var item in searchResults.Result.Result.Content)
-                        {
-                            pop.setTextBoxSuggestions(item.ArtistName); //Add the artists returned to the suggestions in the NoArtistPopUp Forms textbox
-
-                        }
-                        pop.ShowDialog(); //Show the new dialogue box
-                        artist2 = artist;
-                    }
+                    pop.setTextBoxSuggestions(item.ArtistName);
                 }
+                
+                pop.ShowDialog();
+                artistName = artist;
             }
-            catch(Exception e)
-            {
+            artist = "Unknown Artist";
+            return artistName;
+        }
 
-            }
-
-
-
+        private async Task<string> getAlbumArtwork(TagLib.File audioFile, string artist2, string album)
+        {
+            string imgURL;
             try
             {
-
                 var albumInfoSearchResults = Task.Run(() => { client.Album.GetInfoAsync(artist2, album); });
                 var searchResults = albumInfoSearchResults.ContinueWith(t => client.Album.GetInfoAsync(artist2, album));
                 searchResults.Wait();
@@ -278,18 +285,14 @@ namespace Soulseek_Sorter
             {
                 imgURL = null;
                 Debug.WriteLine(e.Message);
-
             }
-
-            var results = new Tuple<string, string, string, string>(album, artist2, title, imgURL);
-            return results;
+            return imgURL;
         }
 
-        private void updateUI(ref Form1 form, string album, string picture, string artist)
-        {
-            form.artistLabel.Text = artist;
-            form.albumName.Text = album;
-            form.pictureBox1.Load(picture);
-        }
+        
+
+
+
+        
     }
 }

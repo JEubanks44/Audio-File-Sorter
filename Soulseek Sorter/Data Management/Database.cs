@@ -132,5 +132,25 @@ namespace Soulseek_Sorter
             connection.Close();
             Debug.WriteLine("ADDED ALBUM: " + album.ToUpper());
         }
+
+        public void updateAlbumWithInfo(string artist, string album, string artURL)
+        {
+            if (!checkAlbumExists(artist, album))
+                addAlbum(artist, album);
+            if(artURL == null)
+            {
+                artURL = "";
+            }
+            SqlCommand updateInfo = new SqlCommand("UPDATE Albums SET ArtURL = @URL WHERE (Title = @Title) AND (ArtistId = @ArtistId)");
+            updateInfo.Parameters.AddWithValue("@URL", artURL);
+            updateInfo.Parameters.AddWithValue("@Title", album.ToUpper());
+            updateInfo.Parameters.AddWithValue("ArtistId", getArtistKeyID(artist));
+            updateInfo.Connection = connection;
+            connection.Open();
+            updateInfo.ExecuteNonQuery();
+            connection.Close();
+            Debug.WriteLine("UPDATED ALBUM: " + album.ToUpper());
+            
+        }
     }
 }

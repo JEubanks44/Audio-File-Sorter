@@ -15,31 +15,16 @@ C:\Users\Joseph\Source\Repos\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek 
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe.config
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.exe
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Soulseek Sorter.pdb
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\taglib-sharp.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.config
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csprojAssemblyReference.cache
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Form1.resources
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Properties.Resources.resources
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.GenerateResource.cache
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CoreCompileInputs.cache
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CopyComplete
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.exe
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.pdb
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\ATL.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.pdb
-G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.NoArtistPopUp.resources
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.pdb
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.xml
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Hqub.MusicBrainz.API.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\IF.Lastfm.Core.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MetaBrainz.MusicBrainz.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Mono.HttpUtility.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicBrainz.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Newtonsoft.Json.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Newtonsoft.Json.xml
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\IF.Lastfm.Core.dll
-G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Mono.HttpUtility.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\RestSharp.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Diagnostics.DiagnosticSource.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Net.Http.dll
@@ -47,5 +32,22 @@ G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Security.Cryptography.Algori
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Security.Cryptography.Encoding.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Security.Cryptography.Primitives.dll
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Security.Cryptography.X509Certificates.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\taglib-sharp.dll
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Id3.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MusicApiCollection.xml
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Newtonsoft.Json.xml
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\RestSharp.xml
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\policy.2.0.taglib-sharp.config
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Form1.resources
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.NoArtistPopUp.resources
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.Properties.Resources.resources
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.GenerateResource.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CoreCompileInputs.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csproj.CopyComplete
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.exe
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.pdb
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MetaBrainz.MusicBrainz.xml
+G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Newtonsoft.Json.pdb
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csprojAssemblyReference.cache
