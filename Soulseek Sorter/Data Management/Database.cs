@@ -150,7 +150,8 @@ namespace Soulseek_Sorter
             updateInfo.ExecuteNonQuery();
             connection.Close();
             Debug.WriteLine("UPDATED ALBUM: " + album.ToUpper());
-            
         }
+
+        
     }
 }

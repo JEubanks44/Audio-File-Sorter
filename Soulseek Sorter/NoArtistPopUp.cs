@@ -15,6 +15,8 @@ namespace Soulseek_Sorter
         public bool artistEntered = false;
         public string artist;
         Sorter sort;
+
+
         public NoArtistPopUp(string album, Sorter sort)
         {
             InitializeComponent();

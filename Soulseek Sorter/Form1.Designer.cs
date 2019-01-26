@@ -44,55 +44,56 @@ namespace Soulseek_Sorter
             this.newReleaseButton = new System.Windows.Forms.Button();
             this.DataUpdateButton = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.button1.Location = new System.Drawing.Point(49, 56);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(111, 23);
+            this.button1.Size = new System.Drawing.Size(192, 23);
             this.button1.TabIndex = 0;
-            this.button1.Text = "Completed Folder";
+            this.button1.Text = "Choose Input Directory";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.label1.Location = new System.Drawing.Point(46, 82);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 18);
+            this.label1.Size = new System.Drawing.Size(41, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "label1";
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button2.Location = new System.Drawing.Point(49, 138);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(111, 23);
+            this.button2.Size = new System.Drawing.Size(192, 23);
             this.button2.TabIndex = 2;
-            this.button2.Text = "Destination Folder";
+            this.button2.Text = "Choose Destination Directory";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.label2.Location = new System.Drawing.Point(46, 164);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 18);
+            this.label2.Size = new System.Drawing.Size(41, 15);
             this.label2.TabIndex = 3;
             this.label2.Text = "label2";
             // 
             // button3
             // 
-            this.button3.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(166, 56);
+            this.button3.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.button3.Location = new System.Drawing.Point(247, 56);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -102,8 +103,8 @@ namespace Soulseek_Sorter
             // 
             // button4
             // 
-            this.button4.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(166, 138);
+            this.button4.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.button4.Location = new System.Drawing.Point(247, 138);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -113,7 +114,7 @@ namespace Soulseek_Sorter
             // 
             // button5
             // 
-            this.button5.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.button5.Location = new System.Drawing.Point(49, 223);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
@@ -128,7 +129,7 @@ namespace Soulseek_Sorter
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.BackColor = System.Drawing.Color.DarkRed;
-            this.richTextBox1.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richTextBox1.ForeColor = System.Drawing.Color.White;
             this.richTextBox1.Location = new System.Drawing.Point(49, 252);
             this.richTextBox1.Name = "richTextBox1";
@@ -150,10 +151,10 @@ namespace Soulseek_Sorter
             // 
             this.artistLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.artistLabel.AutoSize = true;
-            this.artistLabel.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.artistLabel.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.artistLabel.Location = new System.Drawing.Point(591, 194);
             this.artistLabel.Name = "artistLabel";
-            this.artistLabel.Size = new System.Drawing.Size(42, 18);
+            this.artistLabel.Size = new System.Drawing.Size(38, 15);
             this.artistLabel.TabIndex = 10;
             this.artistLabel.Text = "Artist";
             // 
@@ -161,20 +162,20 @@ namespace Soulseek_Sorter
             // 
             this.albumName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.albumName.AutoSize = true;
-            this.albumName.Font = new System.Drawing.Font("Monotype Corsiva", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.albumName.Font = new System.Drawing.Font("Cambria", 9.75F);
             this.albumName.Location = new System.Drawing.Point(591, 228);
             this.albumName.Name = "albumName";
-            this.albumName.Size = new System.Drawing.Size(47, 18);
+            this.albumName.Size = new System.Drawing.Size(44, 15);
             this.albumName.TabIndex = 11;
             this.albumName.Text = "Album";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Monotype Corsiva", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(130, 227);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.Size = new System.Drawing.Size(58, 15);
             this.label3.TabIndex = 12;
             this.label3.Text = "Progress: ";
             // 
@@ -208,13 +209,25 @@ namespace Soulseek_Sorter
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(247, 138);
+            this.button6.Font = new System.Drawing.Font("Cambria", 9.75F);
+            this.button6.Location = new System.Drawing.Point(328, 138);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 16;
             this.button6.Text = "Save as DB";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(49, 200);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(173, 17);
+            this.radioButton1.TabIndex = 17;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Use Tag Editor on Every Album";
+            this.radioButton1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -223,6 +236,7 @@ namespace Soulseek_Sorter
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(829, 450);
+            this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.DataUpdateButton);
             this.Controls.Add(this.newReleaseButton);
@@ -265,6 +279,7 @@ namespace Soulseek_Sorter
         private System.Windows.Forms.Button newReleaseButton;
         private System.Windows.Forms.Button DataUpdateButton;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.RadioButton radioButton1;
     }
 }
 

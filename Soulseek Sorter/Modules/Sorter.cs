@@ -13,10 +13,19 @@ using IF.Lastfm.Core.Api;
 using IF.Lastfm.Core.Helpers;
 using System.Threading;
 using IF.Lastfm.Core.Objects;
+
+
 public struct TrackInfo
 {
     public string title;
     public string fileType;
+}
+
+public struct ReleaseDate
+{
+    public int day;
+    public int month;
+    public int year;
 }
 /*
  * Structure: AlbumInfo
@@ -25,9 +34,11 @@ public struct TrackInfo
  */
 public struct AlbumInfo
 {
+    public ReleaseDate releaseDate;
     public List<TrackInfo> trackInfos; //List of TrackInfo structures that hold info for each track in album
     public List<string> tracks;
     public string album;
+    public string originalTitle;
     public string artist;
     public string imageURL;
 };
@@ -40,31 +51,34 @@ namespace Soulseek_Sorter
         public string artist; //Variable that is used to hold the artist value returned from the No Artist Pop Up Window
         public string parentPath; //The parent folder, held to avoid it being deleted
         public int counter1 = 0;
-        LastfmClient client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896");
-        Database data = new Database();
-        [STAThread]
+        LastfmClient client = new LastfmClient("26a4830066690612b113890b795bb307", "3229dd61c790557dcba24809e350d896"); //LastFM API Access Client
+        Database data = new Database(); //Class Object to interact with Database
+        string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-", "\"", "." }; //Characters that aren't allowed by windows file system (Used to remove before creating new file)
+
+
+        /* Function Name: sortDownloads
+         * Function Purpose: Runs necessary function when called from the UI
+         * Parameters:
+             -> inputPath: String containing the parent directory to be searched for audio files
+             -> outputPath: String containing the output directory where the new assorted folders and files will be placed
+             -> form: Instance of the main GUI form
+        */
         public void sortDownloads(string inputPath, string outputPath, Form1 form)
         {
-            /*
-            data.addArtist("Deathspell Omega");
-            data.addArtist("Absu");
-            data.addArtist("Nyredolk");
-            data.addArtist("Mgla");
-            data.addAlbum("Nyredolk", "Demo 2018");
-            data.addAlbum("Mgla", "With Hearts Towards None");
-            data.addAlbum("Metallica", "...And Justice For All");
-            data.addAlbum("Mgla", "Exercises in Futility");
-            data.updateAlbumWithInfo("Mgla", "Exercises in Futility", "www.no-solace.com");
-            data.updateAlbumWithInfo("Skinless", "Savagery", "www.noURL.com");
-            data.addAlbum("Deathspell Omega", "Drought");     
-            data.deleteArtist("Deathspell Omega");
-            */
+            
             recurFileSort(inputPath, outputPath, form);
             form.printOutput("\nDONE!");
-            form.richTextBox1.ScrollToCaret();
-            
+            form.richTextBox1.ScrollToCaret();   
         }
-   
+
+
+        /* Function Name: recurFileSort
+         * Function Purpose: Recursively searches the input directory and gathers information about audio files when found. Main function of class
+         * Parameters:
+         *      -> inPath: Parent directory that will be searched recursively
+         *      -> outPath: Directory that sorted files will be placed in
+         *      -> form: Instance of the main GUI form
+         */
         private void recurFileSort(string inPath, string outPath, Form1 form)
         {
 
@@ -79,7 +93,6 @@ namespace Soulseek_Sorter
                 AlbumInfo albumInfo = new AlbumInfo();
                 albumInfo.tracks = new List<string>();
                 albumInfo.trackInfos = new List<TrackInfo>();
-
                 int counter = 0;
                 for (int i = 0; i < files.Length; i++)
                 {
@@ -88,78 +101,36 @@ namespace Soulseek_Sorter
                     if ((file.Contains(".mp3") || file.Contains(".wav") || file.Contains(".flac")) && (!file.Contains(".reapeaks") || !file.Contains(".asd")))
                     {
                         TrackInfo trackInfo = new TrackInfo();
-                        TagLib.File audioFile = null;
-                        if(file.Contains(".mp3"))
-                        {
-                            audioFile = TagLib.File.Create(file);
-                            trackInfo.fileType = ".mp3";
-                        }
-                        else if(file.Contains(".flac"))
-                        {
-                            audioFile = TagLib.Flac.File.Create(file);
-                            trackInfo.fileType = ".flac";
-                        }
-
-                        string[] bannedChars = { "*", "\"", "/", "\\", "[", "]", ":", ";", "|", "=", "?", "!", "%", "-", "\"", "."};
-
+                        TagLib.File audioFile = generateAudioFile(file);
+                        trackInfo.fileType = getFileType(file);
                         try
                         {
                             trackInfo.title = audioFile.Tag.Title.ToString();
                         }
                         catch(Exception e)
                         {
-
+                            Debug.WriteLine(e.Message);
                         }
                         if (counter == 0)
-                        {
-                            //var initInfo = getInitialInfo(audioFile); //Searches the last fm api for info on the current album. Async function so the program awaits response
-
-
-
-                            albumInfo.album = getAlbumName(audioFile).Result;
-                            albumInfo.artist = getArtistName(audioFile).Result;
-                            albumInfo.imageURL = getAlbumArtwork(audioFile, albumInfo.artist, albumInfo.album).Result;
+                        { 
+                            albumInfo.artist = getArtistName(audioFile);
+                            albumInfo.originalTitle = getAlbumName(audioFile);
+                            albumInfo.imageURL = getAlbumArtwork(audioFile, albumInfo.artist, albumInfo.originalTitle);
                             counter = 1;
                             Debug.WriteLine(albumInfo.imageURL);
-
-                            if (albumInfo.imageURL != null)
-                            {
-                                form.pictureBox1.Load(albumInfo.imageURL);
-                            }
-                            if(albumInfo.artist != null)
-                            {
-                                form.artistLabel.Text = albumInfo.artist;
-                            }
-                            if(albumInfo.album != null)
-                            {
-                                form.albumName.Text = albumInfo.album;
-                            }
+                            updateUI(form, albumInfo.album, albumInfo.imageURL, albumInfo.artist);
                             try
                             {
-                                data.updateAlbumWithInfo(albumInfo.artist, albumInfo.album, albumInfo.imageURL);
+                                data.updateAlbumWithInfo(albumInfo.artist, albumInfo.originalTitle, albumInfo.imageURL);
                             }
                             catch(Exception e)
                             {
                                 Debug.WriteLine(e.Message);
                             }
                         }
-
-                        foreach (string charac in bannedChars)
-                        {
-                            if (trackInfo.title != null)
-                            {
-                                trackInfo.title = trackInfo.title.Replace(charac, "");
-                            }
-                            if (albumInfo.album != null)
-                            {
-                                albumInfo.album = albumInfo.album.Replace(charac, "");
-                            }
-                            if (albumInfo.artist != null)
-                            {
-                                albumInfo.artist = albumInfo.artist.Replace(charac, "");
-                            }
-
-                        }
+                        trackInfo.title = removeBannedChars(trackInfo.title);
+                        albumInfo.album = removeBannedChars(albumInfo.originalTitle);
+                        albumInfo.artist = removeBannedChars(albumInfo.artist);
                         albumInfo.tracks.Add(file);
                         albumInfo.trackInfos.Add(trackInfo);
                     }
@@ -167,7 +138,7 @@ namespace Soulseek_Sorter
                     {
                         if(file.Length < 260)
                         {
-                            System.IO.File.Delete(file);
+                            System.IO.File.Delete(file); //If the file breaks the 260 character limit simply delete it
                         }
                     }
                 }
@@ -176,19 +147,18 @@ namespace Soulseek_Sorter
                 for (int i = 0; i < albumInfo.tracks.Count; i++)
                 {
                     Debug.WriteLine(albumInfo.trackInfos[i].title);
-                    sortFile(albumInfo.tracks[i], albumInfo, inPath, outPath, albumInfo.trackInfos[i].title, albumInfo.trackInfos[i].fileType);
+                    sortFile(albumInfo.tracks[i], albumInfo, outPath, albumInfo.trackInfos[i].title, albumInfo.trackInfos[i].fileType);
                     form.richTextBox1.AppendText("Moved: " + albumInfo.artist + "-" + albumInfo.album + "-" + albumInfo.trackInfos[i].title + "\n");
                     form.richTextBox1.ScrollToCaret();
                     System.IO.File.Delete(files[i]);
                 }
-                
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e + "\n");
                 Debug.WriteLine(inPath + "\n");
-                form.richTextBox1.AppendText(e.Message);
-                form.richTextBox1.AppendText(inPath);
+                
+                form.richTextBox1.AppendText("An Error Occured Moving the file located at:" + inPath);
             }
             string[] subDirs = Directory.GetDirectories(inPath);
             foreach (string direc in subDirs)
@@ -200,13 +170,20 @@ namespace Soulseek_Sorter
             {
                 System.IO.Directory.Delete(inPath);
             }
-
             return;
         }
 
-        private void sortFile(string file, AlbumInfo albumInfo, string inPath, string outPath, string trackTitle, string fileType)
+        /* Function Name: sortFile
+         * Function Purpose: Sorts and moves the files into the output directory after necessary information is gathered 
+         * Parameters:
+         *      -> file: String containing the path of the audio file
+         *      -> albumInfo: Structure containing the information gathered for an individual album
+         *      -> outPath: Parent directory of where the new sorted files and folders will be stored
+         *      -> trackTitle: String containing the title of the given audio file
+         *      -> fileType: String containing the file type in order to append it to the end of the final path
+         */
+        private void sortFile(string file, AlbumInfo albumInfo, string outPath, string trackTitle, string fileType)
         {
-            
             string targetPath = outPath + "\\" + albumInfo.artist + "\\" + albumInfo.album; //Creates the new folder directory path, (MusicFolder\artist name\ album name)
             Debug.WriteLine(targetPath);
             if (!Directory.Exists(targetPath)) //If the directory doesn't alread exist create it
@@ -221,26 +198,27 @@ namespace Soulseek_Sorter
             }
         }
 
-        /*
-         * Task: getInitialInfo
-         * Purpose: Retrieves the main metadata from the local tags and from the last.fm API whenever a new album is found
-         */
 
-        private void updateUI(ref Form1 form, string album, string picture, string artist)
+        private void updateUI(Form1 form, string album, string picture, string artist)
         {
-            form.artistLabel.Text = artist;
-            form.albumName.Text = album;
-            form.pictureBox1.Load(picture);
+            if(artist != null)
+                form.artistLabel.Text = artist;
+            if(album != null)
+                form.albumName.Text = album;
+            if(picture != null)
+                form.pictureBox1.Load(picture);
         }
 
-        private async Task<string> getAlbumName(TagLib.File audioFile)
+
+        private string getAlbumName(TagLib.File audioFile)
         {
             string albumName;
             albumName = audioFile.Tag.Album;
             return albumName;
         }
 
-        private async Task<string> getArtistName(TagLib.File audioFile)
+
+        private string getArtistName(TagLib.File audioFile)
         {
             string artistName;
             string albumName;
@@ -271,7 +249,8 @@ namespace Soulseek_Sorter
             return artistName;
         }
 
-        private async Task<string> getAlbumArtwork(TagLib.File audioFile, string artist2, string album)
+
+        private string getAlbumArtwork(TagLib.File audioFile, string artist2, string album)
         {
             string imgURL;
             try
@@ -289,10 +268,52 @@ namespace Soulseek_Sorter
             return imgURL;
         }
 
-        
+
+        private string removeBannedChars(string infoString)
+        {
+            foreach (string character in bannedChars)
+            {
+                if(infoString != null)
+                {
+                    infoString = infoString.Replace(character, "");
+                }
+            }
+            return infoString;
+        }
 
 
+        private TagLib.File generateAudioFile(string file)
+        {
+            TagLib.File audioFile = null;
+            if (file.Contains(".mp3"))
+            {
+                audioFile = TagLib.File.Create(file);
+            }
+            else if (file.Contains(".flac"))
+            {
+                audioFile = TagLib.Flac.File.Create(file);
+            }
+            return audioFile;
 
-        
+        }
+
+        private string getFileType(string file)
+        {
+            string fileType = null;
+            if (file.Contains(".mp3"))
+            {
+                fileType = ".mp3";
+            }
+            else if (file.Contains(".flac"))
+            {
+                fileType = ".flac";
+            }
+            return fileType;
+        }
+
+        private void updateDatabase
+        {
+
+        }
     }
 }

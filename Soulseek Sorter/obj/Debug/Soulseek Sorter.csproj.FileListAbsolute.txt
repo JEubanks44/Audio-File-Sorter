@@ -51,3 +51,4 @@ G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.pdb
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\MetaBrainz.MusicBrainz.xml
 G:\Soulseek Sorter\Soulseek Sorter\bin\Debug\Newtonsoft.Json.pdb
 G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek Sorter.csprojAssemblyReference.cache
+G:\Soulseek Sorter\Soulseek Sorter\obj\Debug\Soulseek_Sorter.TagEditor.resources

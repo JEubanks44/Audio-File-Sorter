@@ -75,10 +75,11 @@ namespace Soulseek_Sorter
         }
 
 
-        private async void button5_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             Sorter sorter = new Sorter();
             sorter.sortDownloads(label1.Text, label2.Text, this);
+            
         }
 
 
